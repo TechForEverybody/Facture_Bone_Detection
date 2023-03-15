@@ -1,0 +1,2 @@
+class_list=['XR_ELBOW','XR_FINGER','XR_FOREARM','XR_HAND','XR_HUMERUS','XR_SHOULDER','XR_WRIST']
+resize_dimension=(224,224)
