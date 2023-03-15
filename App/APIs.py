@@ -7,6 +7,9 @@ inputPropcessor=Processor.InputPropcessor()
 modelProcessor=Processor.ModelProcessor()
 modelProcessor.setModel("../Model/DefinedModel.h5")
 
+
+
+
 app=Flask(__name__)
 
 @app.route("/")
@@ -29,10 +32,15 @@ def getresult():
         if file_name!="":
             print("File Found")
             image_array=inputPropcessor.preprocessInput(os.path.dirname(__file__)+f"\\static\\images\\data\\{file_name}")
-            response_value=modelProcessor.predictClass(image_array)
-            print(response_value)
+            class_name=modelProcessor.predictClass(image_array)
+            facture_possibility,facture_possibility_value=modelProcessor.predictFacturePossibility(image_array,class_name)
+            print(facture_possibility)
+            print(facture_possibility_value)
+            print(class_name)
             return jsonify({
-                "data":response_value
+                "class_name":class_name,
+                "facture_possibility":facture_possibility,
+                "facture_possibility_value":str(facture_possibility_value),
             })
         else:
             return "ERROR"

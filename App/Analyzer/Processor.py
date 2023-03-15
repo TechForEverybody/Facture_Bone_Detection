@@ -22,4 +22,10 @@ class ModelProcessor:
         print(image_array.shape)
         prediction=self.model.predict(image_array)
         return class_list[numpy.argmax(prediction[0])]
+    def predictFacturePossibility(self,image_array,class_name):
+        model=tensorflow.keras.models.load_model(mapping[class_name])
+        print("Bone Facture Predictor is connected")
+        print(image_array.shape)
+        prediction=model.predict(image_array)
+        return facture_possibilities[numpy.argmax(prediction[0])],prediction[0][numpy.argmax(prediction[0])]
 

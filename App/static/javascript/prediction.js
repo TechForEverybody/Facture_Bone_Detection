@@ -5,7 +5,7 @@ function updateFileName(event) {
     if (!!file) {
         file_name.innerHTML=file.name;
     }else{
-        file_name.innerHTML="Select Crop Image";
+        file_name.innerHTML="Select Bone Image";
     }
     console.log(file);
 }
@@ -62,8 +62,12 @@ async function SubmitFile(event) {
                             let result=await outputResponse.json();
                             console.log(result);
                             console.log(result.data);
-                            if (!!result.data) {
-                                detectionresult.innerHTML=`<h2>${result.data}</h2>`
+                            if (!!result.class_name) {
+                                detectionresult.innerHTML=`
+                                <h2>Bone Type : ${result.class_name}</h2>
+                                <h2>Result : ${result.facture_possibility}</h2>
+                                <h2>Confidence Value : ${(100*result.facture_possibility_value).toFixed(2)}%</h2>
+                                `
                             }
                             else{
                                 window.alert("Some Error Occured")
